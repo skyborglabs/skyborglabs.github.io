@@ -10,7 +10,7 @@ GitHub: https://github.com/skyborglabs/skyborglabs.github.io
 1. Publish the repository using GitHub Actions in Settings → Pages.
 2. Set the Pages custom domain to `www.skyborglabs.com` before changing DNS.
 3. In Porkbun, replace the website parking record for `www` with CNAME `skyborglabs.github.io`.
-4. Route the apex `skyborglabs.com` using A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`. Remove conflicting apex parking records. Preserve MX, SPF, DKIM, DMARC, and other mail/verification records. Do not change nameservers.
+4. Route the apex `skyborglabs.com` using an ALIAS record to `skyborglabs.github.io`. This is the configuration applied at Porkbun. The former wildcard parking CNAME was changed to the explicit `www` CNAME above. Preserve MX, SPF, DKIM, DMARC, and other mail/verification records. Do not change nameservers.
 5. Wait for DNS and GitHub's certificate provisioning, then enable Enforce HTTPS when available.
 6. Verify the homepage, game page, video, support, and privacy page without signing in. Check both apex redirect and www HTTPS.
 
@@ -37,3 +37,7 @@ The public privacy page covers this website and email communications. Before an 
 Source: https://support.google.com/googleplay/android-developer/answer/10144311
 
 Add app-ads.txt only when an actual ad network supplies your authorized seller records. No publisher ID or store links have been invented. Add news, demos, press materials, events, music, cards and apparel pages when real content is available.
+
+## Publication progress — October 6, 2026
+
+The source and media are committed to the public GitHub repository. GitHub Actions has built and published all six content pages and the not-found page. The custom domain is configured in GitHub. Porkbun now has apex ALIAS and www CNAME records pointing to skyborglabs.github.io; existing mail and TXT records were preserved. HTTPS certificate provisioning and Google ownership/association must be confirmed separately.

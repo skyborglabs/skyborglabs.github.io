@@ -2,7 +2,7 @@
 """Build the public SKYBORG company site. Standard library only; dist is generated."""
 from pathlib import Path
 from html import escape as e
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote
 import json,os,shutil
 R=Path(__file__).resolve().parent
 C=json.loads((R/'site-config.json').read_text())
@@ -20,7 +20,7 @@ PAGES=[]
 def u(path,d=0):return '../'*d+path
 def a(path,text,d=0,cls=''):return f'<a class="{cls}" href="{u(path,d)}">{text}</a>'
 def eyebrow(t):return f'<div class="eyebrow">{t}</div>'
-def mail(subject,body=''):return 'mailto:'+EMAIL+'?'+urlencode({'subject':subject,'body':body})
+def mail(subject,body=''):return 'mailto:'+EMAIL+'?'+urlencode({'subject':subject,'body':body},quote_via=quote)
 SUB=mail('Subscribe to SKYBORG email updates','Please subscribe this email address to SKYBORG game-development news, announcements, and promotional offers, including advertisements in newsletters. I understand I can unsubscribe at any time by replying Unsubscribe or emailing admin@skyborglabs.com. I have read the website Privacy Policy.')
 UNSUB=mail('Unsubscribe from SKYBORG updates','Please stop sending marketing email to this email address.')
 def newsletter(d):
@@ -30,6 +30,9 @@ def page(path,title,body,active='',description='',noindex=False):
  nav=''.join(f'<a href="{u(p,d)}"'+(' aria-current="page"' if k==active else '')+f'>{label}</a>' for p,label,k in [('games/','Games','games'),('studio/','Company','studio'),('support/','Contact','support')])
  schema={'@context':'https://schema.org','@type':'Organization','name':COMPANY,'url':C['site_url'],'email':EMAIL,'logo':C['site_url']+'/assets/skyborg-logo.png','description':'Software and game development company.'}
  html=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)} | {COMPANY}</title><meta name="description" content="{e(desc)}"><meta name="theme-color" content="#191c1b"><link rel="canonical" href="{canonical}"><meta property="og:title" content="{e(title)} | SKYBORG"><meta property="og:description" content="{e(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{URL}/assets/slingshot-ring.webp"><link rel="icon" type="image/svg+xml" href="{u('assets/favicon.svg',d)}"><link rel="stylesheet" href="{u('styles.css',d)}"><script defer src="{u('script.js',d)}"></script><script type="application/ld+json">{json.dumps(schema)}</script>{'<meta name="robots" content="noindex">' if noindex else ''}</head><body><a class="skip" href="#main">Skip to content</a><header class="header"><div class="wrap header-inner"><a class="brand" href="{u('index.html',d)}" aria-label="SKYBORG ENTERPRISE LLC home"><span class="logo"><img src="{u('assets/skyborg-logo.png',d)}" width="400" height="400" alt="SKYBORG"></span><span class="brand-text">ENTERPRISE LLC<br>GAME DEVELOPMENT</span></a><button class="menu-toggle" aria-controls="main-nav" aria-expanded="false">Menu +</button><nav class="nav" id="main-nav" aria-label="Main navigation">{nav}<a class="contact-link" href="mailto:{EMAIL}">Get in touch <span aria-hidden="true">↗</span></a></nav></div></header><main id="main">{body}</main><footer class="footer"><div class="wrap"><div class="footer-main"><div><div class="footer-name">{COMPANY}</div><p>Software & game development<br><a href="mailto:{EMAIL}">{EMAIL}</a></p></div><nav class="footer-nav" aria-label="Footer navigation">{a('games/','Games',d)}{a('studio/','Company',d)}{a('support/','Contact & support',d)}{a('privacy/','Privacy Policy',d)}</nav></div><div class="footer-bottom"><span>© 2026 {COMPANY}. All rights reserved.</span><span>Slingshot Wrestling is a working title.</span></div></div></footer></body></html>'''
+ if noindex:
+  import re
+  html=re.sub(r'(href|src)="(?![a-z]+:|/|#)([^"]+)"',r'\1="/\2"',html)
  f=D/path;f.parent.mkdir(parents=True,exist_ok=True);f.write_text(html)
  if not noindex:PAGES.append(canonical)
 def head(label,title,description,d=1):return f'<section class="page-head wrap"><div class="crumb">{a("index.html","Home",d)} / {label}</div>{eyebrow(label)}<h1>{title}</h1><p>{description}</p></section>'
