@@ -28,8 +28,8 @@ Repository: https://github.com/skyborglabs/skyborglabs.github.io
 Select **Settings → Pages → Source → GitHub Actions**. The included `.github/workflows/pages.yml` builds and deploys `dist/` on pushes to `main`, or when run manually.
 Set the Pages custom domain to `www.skyborglabs.com`, then configure DNS at Porkbun. See LAUNCH-NOTES.md. CNAME alone does not complete DNS or Google ownership verification.
 
-## Email updates
+## Contact and privacy
 
-“Subscribe by email” opens the visitor’s email application with an explicit opt-in request. The visitor must send the email; clicking the button does not subscribe them. Requests arrive at admin@skyborglabs.com and must be managed by the studio. The website does not have a newsletter database or pretend to accept form submissions.
+The public website provides the studio's confirmed business email and a dedicated privacy page. Newsletter signup has been removed. Connect a real mailing provider with consent, unsubscribe, and updated disclosures before adding a subscription form; no simulated form or manual subscription button is published.
 
 No analytics, cookies, third-party embeds, ad SDKs, checkout, or tracking scripts are added by the website code. Update the policy if services are added. No blanket open-source license has been applied to the company logo or site assets.

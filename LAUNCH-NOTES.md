@@ -28,7 +28,7 @@ Organization registration also requires accurate organization/legal identity, D-
 
 ## Email operations and future app privacy
 
-The current newsletter mechanism is an opt-in email request, not an automated signup. Before sending commercial newsletters, establish your mailing-list process, a valid postal sender address, and functioning unsubscribe handling. Never send a marketing message merely because someone contacted support. No newsletters have been sent by this project.
+Newsletter signup is currently removed. A future web signup requires an actual mailing-list provider and verified form endpoint. Before sending commercial newsletters, establish your mailing-list process, a valid postal sender address, and functioning unsubscribe handling. Never send a marketing message merely because someone contacted support. No newsletters have been sent by this project.
 
 Source: https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business
 
@@ -41,3 +41,7 @@ Add app-ads.txt only when an actual ad network supplies your authorized seller r
 ## Publication progress — October 6, 2026
 
 The source and media are committed to the public GitHub repository. GitHub Actions has built and published all six content pages and the not-found page. The custom domain is configured in GitHub. Porkbun now has apex ALIAS and www CNAME records pointing to skyborglabs.github.io; existing mail and TXT records were preserved. HTTPS certificate provisioning and Google ownership/association must be confirmed separately.
+
+## Presentation and HTTPS corrections
+
+Artwork is displayed at its native aspect ratio, with the featured game image in its own full-width row. The character portrait and video ending use the same two character designs as the ring scene. Manual newsletter signup has been removed. A dedicated website/email privacy policy remains at /privacy/. GitHub Enforce HTTPS is enabled; the HTTP games URL was verified to redirect to a valid HTTPS response.
